@@ -19,5 +19,10 @@ public class ReserveServiceImpl extends GenericServiceImpl<Reserve, Long> implem
     public CrudRepository<Reserve, Long> getDao() {
         return reserveDaoAPI;
     }
+
+    @Override
+    public void confirm(Long id) {
+        get(id).setState(true);
+    }
     
 }

@@ -1,5 +1,8 @@
 package dev.gracialab.glab.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
@@ -20,9 +23,15 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
         return userDaoAPI;
     }
 
-    // public List<User> search(String mail) {
-    //     SearchSpecifications<User> searchSpecifications = new SearchSpecifications<>();
-    //     searchSpecifications.add(new searchCriteria("mail", mail, SearchOperation.EQUAL));
-    //     return userDaoAPI.findAll(searchSpecifications);
-    // }
+    public List<User> search(String mail) {
+        // SearchSpecifications<User> searchSpecifications = new SearchSpecifications<>();
+        // searchSpecifications.add(new searchCriteria("mail", mail, SearchOperation.EQUAL));
+        List<User> returnList = new ArrayList<>();
+        getDao().findAll().forEach(obj -> {
+            if(obj.getMail().equals(mail)) {
+                returnList.add(obj);
+            }
+        });
+        return returnList;
+    }
 }

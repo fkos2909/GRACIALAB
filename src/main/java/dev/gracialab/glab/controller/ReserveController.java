@@ -1,4 +1,6 @@
 package dev.gracialab.glab.controller;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 // import org.springframework.format.annotation.DateTimeFormat;
@@ -52,25 +54,26 @@ public class ReserveController {
 
     @PostMapping("/saveReserve")
     public String saveReserve(Reserve reserve, User user, Model model) {
-        reserveServiceAPI.save(reserve); 
-        // if(user.getMail() == "fatima.ospina@gmail.com"){
-        //     Reserve re = new Reserve(reserve.getId(), reserve.getDate(), reserve.getHour(), reserve.getState(), reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
-        //     // re.setUser_id(user);
-        //     reserveServiceAPI.save(re).setUser_id(userServiceAPI.get(null));
-        // }else{
-        //     Reserve re = new Reserve(reserve.getId(), reserve.getDate(), reserve.getHour(), reserve.getState(), reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote(), user);
-        //     reserveServiceAPI.save(re);
-        //     userServiceAPI.save(user);
-        // }
-        
+        // String mail = new String(user.getMail());
+        List<User> users = userServiceAPI.search("mail");
+        if(users.isEmpty()){
+            reserveServiceAPI.save(reserve);   
+        }else{
+            Reserve reserva = new Reserve(reserve.getDate(), reserve.getHour(), false, reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
+            reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
+            reserveServiceAPI.save(reserva);
+        }
+        // if(userServiceAPI.search(user.getId(), user.getMail()).isEmpty()){
+
+        // }      
         // userServiceAPI.save(user);
 
         return "redirect:/";
     }
 
-    @GetMapping("/reserve-delete/{id}")
-    public String delete(@PathVariable Long id, Model model){
-        reserveServiceAPI.delete(id);
+    @GetMapping("/reserve-confirm/{id}")
+    public String confirm(@PathVariable Long id, Model model){
+        reserveServiceAPI.confirm(id);
         return "redirect:/";
     }
 

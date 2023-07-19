@@ -68,15 +68,13 @@ public class Reserve {
     public Reserve() {
     }
 
-    public Reserve(Date date, Time hour, Boolean state, String reserve_type, Integer number_of_people, String note,
-            User user_id) {
+    public Reserve(Date date, Time hour, Boolean state, String reserve_type, Integer number_of_people, String note) {
         this.date = date;
         this.hour = hour;
         this.state = state;
         this.reserve_type = reserve_type;
         this.number_of_people = number_of_people;
         this.note = note;
-        this.user_id = user_id;
     }
 
     

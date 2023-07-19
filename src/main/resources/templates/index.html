@@ -39,7 +39,7 @@
                             <td th:if="${user == reserve.user_id}"><a th:href="@{/reserve/{id}/{user_id}(id=${reserve.id}, user_id=${user.id})}" class="btn btn-primary">Editar</a> </td>
 
                         </th:block>
-                        <td><a th:href="@{/reserve-delete/{id}(id=${reserve.id})}" class="btn btn-danger">Eliminar</a> </td>
+                        <td><a th:href="@{/reserve-confirm/{id}(id=${reserve.id})}" class="btn btn-danger">Confirmar</a> </td>
                     </tr>
                 </tbody>
             </table>

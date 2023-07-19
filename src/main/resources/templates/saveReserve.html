@@ -11,6 +11,26 @@
     <div class="container">
         <form action="#" th:action="@{/saveReserve}" th:object="${reserve}" method="post">
             <input type="hidden" th:field="*{id}" name="id" id="id">
+            <div class="form-group">
+                <label for="user_name">Nombre</label>
+                <input type="text" class="form-control" id="user_name" th:field="*{user_id.name}" name="user_name">
+            </div>
+            <div class="form-group">
+                <label for="user_last_name">Apellido</label>
+                <input type="text" class="form-control" id="user_last_name" th:field="*{user_id.last_name}" name="user_last_name">
+            </div>
+            <div class="form-group">
+                <label for="user_document_type">Tipo de documento</label>
+                <input type="text" class="form-control" id="user_document_type" th:field="*{user_id.document_type}" name="user_document_type">
+            </div>
+            <div class="form-group">
+                <label for="user_document">Documento</label>
+                <input type="text" class="form-control" id="user_document" th:field="*{user_id.document}" name="user_document">
+            </div>
+            <div class="form-group">
+                <label for="user_mail">Correo</label>
+                <input type="text" class="form-control" id="user_mail" th:field="*{user_id.mail}" name="user_mail">
+            </div>
             <input type="hidden" th:field="*{user_id}" name="user_id" id="user_id">
             <div class="form-group">
                 <label for="date">Fecha</label>
@@ -22,26 +42,22 @@
             </div>
             <div class="form-group">
                 <label for="reserve_type">Tipo de reserva</label>
-                <input type="text" class="form-control" id="reserve_type" th:field="*{reserve_type}" name="reserve_type" maxlength="100">
-            </div>
-            <!-- <div class="form-group">
-                <select class="form-select">
-                    <option selected>Selecciona un tipo de reserva</option>
-                    <option value="almuerzo">Almuerzo</option>
-                    <option value="cena">Cena</option>
-                    <option value="onces">Onces</option>
-                    <option value="cumpleaños">Cumpleaños</option>
-                    <option value="ocasion especial">Ocasion especial</option>
+                <!-- <input type="text" class="form-control" id="reserve_type" th:field="*{reserve_type}" name="reserve_type" maxlength="100"> -->
+                <select class="form-select"  th:field="*{reserve_type}">
+                    <option value="" selected>Selecciona un tipo de reserva</option>
+                    <option value="Almuerzo">Almuerzo</option>
+                    <option value="Cena">Cena</option>
+                    <option value="Onces">Onces</option>
+                    <option value="Cumpleaños">Cumpleaños</option>
+                    <option value="Ocasion especial">Ocasion especial</option>
                 </select>
-            </div> -->
+            </div>
+            
             <div class="form-group">
                 <label for="number_of_people">Cantidad de personas</label>
                 <input type="number" class="form-control" id="number_of_people" th:field="*{number_of_people}" name="number_of_people">
             </div>
-            <div class="form-group">
-                <label for="user_email">Correo</label>
-                <input type="text" class="form-control" id="user_email" th:field="*{user_id.mail}" name="user_email">
-            </div>
+            
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>
     </div>

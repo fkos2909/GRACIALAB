@@ -5,4 +5,5 @@ import dev.gracialab.glab.model.Reserve;
 
 public interface ReserveServiceAPI extends GenericServiceAPI<Reserve, Long> {
     
+    void confirm(Long id);
 }
