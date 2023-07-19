@@ -15,6 +15,7 @@ import dev.gracialab.glab.service.api.UserServiceAPI;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -53,9 +54,9 @@ public class ReserveController {
     }
 
     @PostMapping("/saveReserve")
-    public String saveReserve(Reserve reserve, User user, Model model) {
+    public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
         // String mail = new String(user.getMail());
-        List<User> users = userServiceAPI.search("mail");
+        List<User> users = userServiceAPI.search(mail);
         if(users.isEmpty()){
             reserveServiceAPI.save(reserve);   
         }else{
