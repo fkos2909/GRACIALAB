@@ -26,8 +26,6 @@ public class Reserve {
     private Date date;
 
     @Column
-    // @DateTimeFormat(pattern = "HH:mm:ss")
-    // @Temporal(TemporalType.TIME)
     private java.sql.Time hour;
 
     @Column
@@ -63,8 +61,8 @@ public class Reserve {
     }
 
     public void setHour(java.sql.Time hour) {
-        this.hour = new java.sql.Time(hour.getTime());
-        // this.hour = hour;
+        // this.hour = new java.sql.Time(hour.getTime());
+        this.hour = hour;
     }
 
     public Boolean getState() {
