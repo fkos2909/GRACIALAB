@@ -22,7 +22,9 @@ public class ReserveServiceImpl extends GenericServiceImpl<Reserve, Long> implem
 
     @Override
     public void confirm(Long id) {
-        get(id).setState(true);
+        Reserve reserva = get(id);
+        reserva.setState(true);
+        reserveDaoAPI.save(reserva);
     }
     
 }
