@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class User {
@@ -28,7 +28,7 @@ public class User {
     @Column
     private String document;
 
-    @Column
+    @Column(nullable = false, unique = true)
     private String mail;
 
     @Column
@@ -37,17 +37,17 @@ public class User {
     @Column
     private String phone;
 
-    // @OneToMany(cascade = CascadeType.ALL)
-    // @JoinColumn(name="name")
-    // private Rol rol_id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="rol_id")
+    private Rol rol_id;
 
-    // public Rol getRol_id() {
-    //     return rol_id;
-    // }
+    public Rol getRol_id() {
+        return rol_id;
+    }
 
-    // public void setRol_id(Rol rol_id) {
-    //     this.rol_id = rol_id;
-    // }
+    public void setRol_id(Rol rol_id) {
+        this.rol_id = rol_id;
+    }
 
     public Long getId() {
         return id;

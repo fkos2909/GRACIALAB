@@ -44,8 +44,8 @@ public class Reserve {
     private String note;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="mail")
-    private User user_mail;
+    @JoinColumn(name="user_id")
+    private User user_id;
 
 
     public Long getId() {
@@ -105,12 +105,12 @@ public class Reserve {
         this.note = note;
     }
 
-    public User getUser_mail() {
-        return user_mail;
+    public User getUser_id() {
+        return user_id;
     }
 
-    public void setUser_mail(User user_mail) {
-        this.user_mail = user_mail;
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
     }
 
     
