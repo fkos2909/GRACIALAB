@@ -11,7 +11,7 @@
     <div class="container">
         <h2>Lista de reservas</h2>
         <div>
-            <a href="/reserve/0" class="btn btn-primary">Agregar</a>
+            <a href="/reserve/0/0" class="btn btn-primary">Agregar</a>
         </div>
         <div th:if="${reserveList.isEmpty()}">
             <h2>No hay reservas</h2>
@@ -34,7 +34,11 @@
                         <td th:text="${reserve.hour}" ></td>
                         <td th:text="${reserve.reserve_type}" ></td>
                         <td th:text="${reserve.number_of_people}" ></td>
-                        <td><a th:href="@{/reserve/{id}(id=${reserve.id})}" class="btn btn-primary">Editar</a> </td>
+                        <!-- No tuve tiempo de entender, así que solo lo busque al usuario de forma manual #verguenza -->
+                        <th:block th:each="user : ${userList}">
+                            <td th:if="${user == reserve.user_id}"><a th:href="@{/reserve/{id}/{user_id}(id=${reserve.id}, user_id=${user.id})}" class="btn btn-primary">Editar</a> </td>
+
+                        </th:block>
                         <td><a th:href="@{/reserve-delete/{id}(id=${reserve.id})}" class="btn btn-danger">Eliminar</a> </td>
                     </tr>
                 </tbody>

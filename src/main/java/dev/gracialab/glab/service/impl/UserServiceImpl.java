@@ -19,4 +19,10 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
     public CrudRepository<User, Long> getDao() {
         return userDaoAPI;
     }
+
+    // public List<User> search(String mail) {
+    //     SearchSpecifications<User> searchSpecifications = new SearchSpecifications<>();
+    //     searchSpecifications.add(new searchCriteria("mail", mail, SearchOperation.EQUAL));
+    //     return userDaoAPI.findAll(searchSpecifications);
+    // }
 }

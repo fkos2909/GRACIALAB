@@ -11,6 +11,7 @@
     <div class="container">
         <form action="#" th:action="@{/saveReserve}" th:object="${reserve}" method="post">
             <input type="hidden" th:field="*{id}" name="id" id="id">
+            <input type="hidden" th:field="*{user_id}" name="user_id" id="user_id">
             <div class="form-group">
                 <label for="date">Fecha</label>
                 <input type="date" class="form-control" id="date" th:field="*{date}" name="date">
@@ -36,6 +37,10 @@
             <div class="form-group">
                 <label for="number_of_people">Cantidad de personas</label>
                 <input type="number" class="form-control" id="number_of_people" th:field="*{number_of_people}" name="number_of_people">
+            </div>
+            <div class="form-group">
+                <label for="user_email">Correo</label>
+                <input type="text" class="form-control" id="user_email" th:field="*{user_id.mail}" name="user_email">
             </div>
             <button type="submit" class="btn btn-primary">Crear</button>
         </form>

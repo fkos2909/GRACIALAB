@@ -28,7 +28,7 @@ public class User {
     @Column
     private String document;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String mail;
 
     @Column

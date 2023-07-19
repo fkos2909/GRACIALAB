@@ -13,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+import java.sql.Time;
 // import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -44,8 +45,52 @@ public class Reserve {
     private String note;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="user_id") //referencedColumnName
     private User user_id;
+
+    
+
+
+    public Reserve(Long id, Date date, Time hour, Boolean state, String reserve_type, Integer number_of_people,
+            String note, User user_id) {
+        this.id = id;
+        this.date = date;
+        this.hour = hour;
+        this.state = state;
+        this.reserve_type = reserve_type;
+        this.number_of_people = number_of_people;
+        this.note = note;
+        this.user_id = user_id;
+    }
+    
+    
+
+    public Reserve() {
+    }
+
+    public Reserve(Date date, Time hour, Boolean state, String reserve_type, Integer number_of_people, String note,
+            User user_id) {
+        this.date = date;
+        this.hour = hour;
+        this.state = state;
+        this.reserve_type = reserve_type;
+        this.number_of_people = number_of_people;
+        this.note = note;
+        this.user_id = user_id;
+    }
+
+    
+    public Reserve(Long id, Date date, Time hour, Boolean state, String reserve_type, Integer number_of_people,
+            String note) {
+        this.id = id;
+        this.date = date;
+        this.hour = hour;
+        this.state = state;
+        this.reserve_type = reserve_type;
+        this.number_of_people = number_of_people;
+        this.note = note;
+    }
+
 
 
     public Long getId() {
@@ -109,10 +154,17 @@ public class Reserve {
         return user_id;
     }
 
+    public Long getUserId() {
+        
+        return user_id.getId();
+    }
+
     public void setUser_id(User user_id) {
         this.user_id = user_id;
     }
 
-    
+    // public User getUser_mail() {
+    //     return user_id;
+    // }
 
 }
