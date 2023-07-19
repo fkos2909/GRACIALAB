@@ -24,7 +24,6 @@ public class ReserveController {
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("reserveList", reserveServiceAPI.getAll());
-        // model.addAttribute("reserve-list", reserveServiceAPI.getAll());
         return "index";
     }
 
@@ -33,6 +32,7 @@ public class ReserveController {
     public String formReserve(@PathVariable("id") Long id, Model model) {
         if (id != null && id != 0){
             model.addAttribute("reserve", reserveServiceAPI.get(id));
+            // model.addAttribute("user", userServiceAPI.get(id));
         }else{
             model.addAttribute("reserve", new Reserve());
         }

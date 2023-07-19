@@ -1,10 +1,13 @@
 package dev.gracialab.glab.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -33,6 +36,18 @@ public class User {
 
     @Column
     private String phone;
+
+    // @OneToMany(cascade = CascadeType.ALL)
+    // @JoinColumn(name="name")
+    // private Rol rol_id;
+
+    // public Rol getRol_id() {
+    //     return rol_id;
+    // }
+
+    // public void setRol_id(Rol rol_id) {
+    //     this.rol_id = rol_id;
+    // }
 
     public Long getId() {
         return id;

@@ -2,11 +2,14 @@ package dev.gracialab.glab.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
@@ -39,6 +42,11 @@ public class Reserve {
 
     @Column
     private String note;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="mail")
+    private User user_mail;
+
 
     public Long getId() {
         return id;
@@ -95,6 +103,14 @@ public class Reserve {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public User getUser_mail() {
+        return user_mail;
+    }
+
+    public void setUser_mail(User user_mail) {
+        this.user_mail = user_mail;
     }
 
     
