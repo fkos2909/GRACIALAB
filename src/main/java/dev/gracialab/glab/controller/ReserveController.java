@@ -1,6 +1,8 @@
 package dev.gracialab.glab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+// import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,16 +29,17 @@ public class ReserveController {
     }
 
     @GetMapping("/reserve/{id}")
+    @DateTimeFormat(pattern = "hh:mm:ss")
     public String formReserve(@PathVariable("id") Long id, Model model) {
         if (id != null && id != 0){
-            model.addAttribute("Reserve", reserveServiceAPI.get(id));
+            model.addAttribute("reserve", reserveServiceAPI.get(id));
         }else{
-            model.addAttribute("Reserve", new Reserve());
+            model.addAttribute("reserve", new Reserve());
         }
-        return "save";
+        return "saveReserve";
     }
 
-    @PostMapping("/reserve-save")
+    @PostMapping("/saveReserve")
     public String saveReserve(Reserve reserve, Model model) {
         reserveServiceAPI.save(reserve);
         return "redirect:/";
@@ -48,10 +51,10 @@ public class ReserveController {
         return "redirect:/";
     }
 
-    @RequestMapping("/api/message")
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, World!";
-    }
+    // @RequestMapping("/api/message")
+    // @GetMapping("/hello")
+    // public String hello() {
+    //     return "Hello, World!";
+    // }
     
 }

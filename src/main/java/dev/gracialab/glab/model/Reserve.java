@@ -1,10 +1,17 @@
 package dev.gracialab.glab.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+
+// import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class Reserve {
@@ -14,13 +21,17 @@ public class Reserve {
     private Long id;
 
     @Column
-    private java.sql.Date date;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @Column
+    // @DateTimeFormat(pattern = "HH:mm:ss")
+    // @Temporal(TemporalType.TIME)
     private java.sql.Time hour;
 
     @Column
-    private String state;
+    private Boolean state;
 
     @Column
     private String reserve_type;
@@ -39,11 +50,11 @@ public class Reserve {
         this.id = id;
     }
 
-    public java.sql.Date getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(java.sql.Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -52,14 +63,15 @@ public class Reserve {
     }
 
     public void setHour(java.sql.Time hour) {
-        this.hour = hour;
+        this.hour = new java.sql.Time(hour.getTime());
+        // this.hour = hour;
     }
 
-    public String getState() {
+    public Boolean getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Boolean state) {
         this.state = state;
     }
 
