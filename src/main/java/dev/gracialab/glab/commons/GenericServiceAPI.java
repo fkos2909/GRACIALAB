@@ -11,5 +11,5 @@ public interface GenericServiceAPI <T, ID extends Serializable>{
 
     T get(ID id);
 
-    List<T> gellAll();
+    List<T> getAll();
 }

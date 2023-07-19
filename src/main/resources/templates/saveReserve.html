@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva</title>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <form action="#" th:action="@{/reserve-save}" th:object="${reserve}" method="post">
+            <input type="hidden" th:field="*{id}" name="id" id="id">
+            <div class="form-group">
+                <label for="date">Fecha</label>
+                <input type="date" class="form-control" id="date" th:field="*{date}" name="date">
+            </div>
+            <div class="form-group">
+                <label for="hour">Hora</label>
+                <input type="time" class="form-control" id="hour" th:field="*{hour}" name="hour">
+            </div>
+            <div class="form-group">
+                <label for="reserve_type">Tipo de reserva</label>
+                <input type="text" class="form-control" id="reserve_type" th:field="*{reserve_type}" name="reserve_type" maxlength="100">
+            </div>
+            <!-- <div class="form-group">
+                <select class="form-select">
+                    <option selected>Selecciona un tipo de reserva</option>
+                    <option value="almuerzo">Almuerzo</option>
+                    <option value="cena">Cena</option>
+                    <option value="onces">Onces</option>
+                    <option value="cumpleaños">Cumpleaños</option>
+                    <option value="ocasion especial">Ocasion especial</option>
+                </select>
+            </div> -->
+            <div class="form-group">
+                <label for="number_of_people">Cantidad de personas</label>
+                <input type="int" class="form-control" id="number_of_people" th:field="*{number_of_people}" name="number_of_people">
+            </div>
+            <button type="submit" class="btn btn-primary">Crear</button>
+        </form>
+    </div>
+    
+</body>
+</html> 

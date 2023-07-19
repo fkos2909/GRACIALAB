@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva</title>
+    <!-- Bootstrap CSS -->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <h2>Lista de reservas</h2>
+        <div>
+            <a href="/reserve/0" class="btn btn-primary">Agregar</a>
+        </div>
+        <div th:if="${reserveList.isEmpty()}">
+            <h2>No hay reservas</h2>
+        </div>
+        <div th:if="${!reserveList.isEmpty()}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Hora</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">N° de personas</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="reserve : ${reserveList}" >
+                        <td th:text="${reserve.date}" ></td>
+                        <td th:text="${reserve.hour}" ></td>
+                        <td th:text="${reserve.reserve_type}" ></td>
+                        <td th:text="${reserve.number_of_people}" ></td>
+                        <td><a th:href="@{/reserve/{id}(id=${reserve.id})}" class="btn btn-primary">Editar</a> </td>
+                        <td><a th:href="@{/reserve-delete/{id}(id=${reserve.id})}" class="btn btn-danger">Eliminar</a> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</body>
+</html> 
