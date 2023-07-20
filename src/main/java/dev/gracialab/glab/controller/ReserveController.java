@@ -2,8 +2,6 @@ package dev.gracialab.glab.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-// import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,16 +27,19 @@ public class ReserveController {
     @Autowired
     private UserServiceAPI userServiceAPI;
 
-    @RequestMapping("/")
-    public String index(Model model) {
-        model.addAttribute("reserveList", reserveServiceAPI.getAll());              
-        model.addAttribute("userList", userServiceAPI.getAll());          
-        return "index";
+    @RequestMapping("/rest")
+    public String indexRest(Model model) {
+        return "indexRest";
     }
 
-    @GetMapping("/reserve/{id}/{user_id}")
-    @DateTimeFormat(pattern = "hh:mm:ss")
-    public String formReserve(@PathVariable("id") Long id, @PathVariable("user_id") Long user_id, Model model) {
+    @RequestMapping("/rest/admin")
+    public String RestList(Model model) {
+        model.addAttribute("reserveList", reserveServiceAPI.getAll());        
+        return "innerPageReserveList";
+    }
+
+    @GetMapping("/reserveIndex/{id}/{user_id}")
+    public String formReserveT(@PathVariable("id") Long id, @PathVariable("user_id") Long user_id, Model model) {
         if (id != null && id != 0){
             model.addAttribute("reserve", reserveServiceAPI.get(id));
             if(user_id != 0){
@@ -49,8 +50,29 @@ public class ReserveController {
             model.addAttribute("user", new User());
 
         }
-        return "saveReserve";
+        return "innerPage";
     }
+
+    // @RequestMapping("/")
+    // public String index(Model model) {
+    //     model.addAttribute("reserveList", reserveServiceAPI.getAll());    
+    //     return "index";
+    // }
+
+    // @GetMapping("/reserve/{id}/{user_id}")
+    // public String formReserve(@PathVariable("id") Long id, @PathVariable("user_id") Long user_id, Model model) {
+    //     if (id != null && id != 0){
+    //         model.addAttribute("reserve", reserveServiceAPI.get(id));
+    //         if(user_id != 0){
+    //             model.addAttribute("user", userServiceAPI.get(user_id));
+    //         }
+    //     }else{
+    //         model.addAttribute("reserve", new Reserve());
+    //         model.addAttribute("user", new User());
+
+    //     }
+    //     return "saveReserve";
+    // }
 
     @PostMapping("/saveReserve")
     public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
@@ -58,6 +80,7 @@ public class ReserveController {
 
         if(reserve.getId() != null ){
             reserveServiceAPI.save(reserve);
+            return "redirect:/rest/admin";
         }else{
             if(users.isEmpty()){
                 Reserve reserva = reserveServiceAPI.save(reserve);
@@ -73,19 +96,13 @@ public class ReserveController {
 
         
 
-        return "redirect:/";
+        return "redirect:/rest";
     }
 
     @GetMapping("/reserve-confirm/{id}")
     public String confirm(@PathVariable Long id, Model model){
         reserveServiceAPI.confirm(id);
-        return "redirect:/";
+        return "redirect:/rest/admin";
     }
-
-    // @RequestMapping("/api/message")
-    // @GetMapping("/hello")
-    // public String hello() {
-    //     return "Hello, World!";
-    // }
     
 }
