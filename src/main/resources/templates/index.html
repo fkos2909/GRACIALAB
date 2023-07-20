@@ -24,6 +24,8 @@
                         <th scope="col">Hora</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">N° de personas</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Nombre</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -34,11 +36,10 @@
                         <td th:text="${reserve.hour}" ></td>
                         <td th:text="${reserve.reserve_type}" ></td>
                         <td th:text="${reserve.number_of_people}" ></td>
-                        <!-- No tuve tiempo de entender, así que solo lo busque al usuario de forma manual #verguenza -->
-                        <th:block th:each="user : ${userList}">
-                            <td th:if="${user == reserve.user_id}"><a th:href="@{/reserve/{id}/{user_id}(id=${reserve.id}, user_id=${user.id})}" class="btn btn-primary">Editar</a> </td>
+                        <td th:text="${reserve.state}" ></td>
+                        <td th:text="${reserve.user_id.name}" ></td>
+                        <td ><a th:href="@{/reserve/{id}/{user_id}(id=${reserve.id}, user_id=${reserve.user_id.id})}" class="btn btn-primary">Editar</a> </td>
 
-                        </th:block>
                         <td><a th:href="@{/reserve-confirm/{id}(id=${reserve.id})}" class="btn btn-danger">Confirmar</a> </td>
                     </tr>
                 </tbody>
