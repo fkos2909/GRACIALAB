@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import dev.gracialab.glab.commons.GenericServiceImpl;
 import dev.gracialab.glab.dao.api.UserDaoAPI;
+import dev.gracialab.glab.service.api.RolServiceAPI;
 import dev.gracialab.glab.service.api.UserServiceAPI;
+import dev.gracialab.glab.model.Rol;
 import dev.gracialab.glab.model.User;
 
 
@@ -17,6 +19,8 @@ import dev.gracialab.glab.model.User;
 public class UserServiceImpl extends GenericServiceImpl<User, Long> implements UserServiceAPI {
     @Autowired
     private UserDaoAPI userDaoAPI;
+    @Autowired
+    private RolServiceAPI rolServiceAPI;
 
     @Override
     public CrudRepository<User, Long> getDao() {
@@ -31,5 +35,11 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
             }
         });
         return returnList;
+    }
+
+    public Rol getRol(String name){
+        Rol rol = rolServiceAPI.getByName("cliente");
+        return rol;
+        // get(id).setRol_id(rol);
     }
 }

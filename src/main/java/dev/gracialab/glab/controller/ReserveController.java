@@ -57,7 +57,10 @@ public class ReserveController {
     public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
         List<User> users = userServiceAPI.search(mail);
         if(users.isEmpty()){
-            reserveServiceAPI.save(reserve);   
+            // reserveServiceAPI.save(reserve);
+            Reserve reserva = reserveServiceAPI.save(reserve);
+            reserva.getUser_id().setRol_id(userServiceAPI.getRol("cliente"));
+            userServiceAPI.save(reserva.getUser_id());
         }else{
             Reserve reserva = new Reserve(reserve.getDate(), reserve.getHour(), false, reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
             reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
