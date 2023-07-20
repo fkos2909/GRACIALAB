@@ -66,10 +66,6 @@ public class ReserveController {
             reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
             reserveServiceAPI.save(reserva);
         }
-        // if(userServiceAPI.search(user.getId(), user.getMail()).isEmpty()){
-
-        // }      
-        // userServiceAPI.save(user);
 
         return "redirect:/";
     }
