@@ -9,8 +9,14 @@ La aplicación es capaz de Agregar una reserva y valida si el usuario (por el co
 Por defecto, coloque que todo nuevo usuario se cree con el rol de cliente.
 Puede confirmar la reserva y editarla desde la tabla. (si la hora da error hay que poner en 00 los segundos, creo que ese campo esta de más pero lo deje así)
 
-Debido a que  no tengo experiencia con las herramientas, tuve que inventarme soluciones a errores que aparecieron, se que algunos son fallos en la logica pero me enfoque en lograr los requerimientos. No me dio tiempo de implementar el login, parece que la dependecia que pensaba usar ya esta obsoleta y me quede sin tiempo.
+Debido a que  no tengo experiencia con las herramientas, tuve que inventarme soluciones a errores que aparecieron, se que algunos son fallos en la logica pero me enfoque en lograr los requerimientos. No me dio tiempo de implementar el login, parece que la dependecia que pensaba usar ya esta obsoleta y me quede sin tiempo. Claramente sin login no hay validación de acceso.
+Mi diagrama de base de datos, hace unas horas pense "¿El nombre, apellido y esos datos de Persona no sería otra clase? tipo user_detalles ¿o son parte de la reserva?" pero ya no habia tiempo jajaja.
+
+![Diagrama en blanco](https://github.com/fkos2909/GRACIALAB/assets/92612247/efb0996b-0fbd-4c9c-9819-7cf6fcbc216f)
 
 Igualmente me emocionó conocer nuevas herramientas, ojala sean parte de lo que utilizan en GLAB para aprender a usarlas de forma correcta. Me gustó la estructura de Spring Boot.
+
+Si logro hacer un video de demostración agregaré el link a drive aqui abajo:
+
 
 
