@@ -24,8 +24,6 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
     }
 
     public List<User> search(String mail) {
-        // SearchSpecifications<User> searchSpecifications = new SearchSpecifications<>();
-        // searchSpecifications.add(new searchCriteria("mail", mail, SearchOperation.EQUAL));
         List<User> returnList = new ArrayList<>();
         getDao().findAll().forEach(obj -> {
             if(obj.getMail().equals(mail)) {

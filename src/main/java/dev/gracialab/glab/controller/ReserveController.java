@@ -55,7 +55,6 @@ public class ReserveController {
 
     @PostMapping("/saveReserve")
     public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
-        // String mail = new String(user.getMail());
         List<User> users = userServiceAPI.search(mail);
         if(users.isEmpty()){
             reserveServiceAPI.save(reserve);   
