@@ -38,7 +38,7 @@ public class User {
     private String phone;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="rol_id", referencedColumnName = "id", columnDefinition = "INT NOT NULL DEFAULT 2")
+    @JoinColumn(name="rol_id")
     private Rol rol_id;
 
     public Rol getRol_id() {

@@ -29,7 +29,6 @@ public class ReserveController {
     @Autowired
     private UserServiceAPI userServiceAPI;
 
-
     @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("reserveList", reserveServiceAPI.getAll());              
@@ -56,16 +55,23 @@ public class ReserveController {
     @PostMapping("/saveReserve")
     public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
         List<User> users = userServiceAPI.search(mail);
-        if(users.isEmpty()){
-            // reserveServiceAPI.save(reserve);
-            Reserve reserva = reserveServiceAPI.save(reserve);
-            reserva.getUser_id().setRol_id(userServiceAPI.getRol("cliente"));
-            userServiceAPI.save(reserva.getUser_id());
+
+        if(reserve.getId() != null ){
+            reserveServiceAPI.save(reserve);
         }else{
-            Reserve reserva = new Reserve(reserve.getDate(), reserve.getHour(), false, reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
-            reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
-            reserveServiceAPI.save(reserva);
+            if(users.isEmpty()){
+                Reserve reserva = reserveServiceAPI.save(reserve);
+                reserva.getUser_id().setRol_id(userServiceAPI.getRol("cliente"));
+                userServiceAPI.save(reserva.getUser_id());
+            }else{
+                Reserve reserva = new Reserve(reserve.getDate(), reserve.getHour(), false, reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
+                reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
+                reserveServiceAPI.save(reserva);
+                
+            }
         }
+
+        
 
         return "redirect:/";
     }
