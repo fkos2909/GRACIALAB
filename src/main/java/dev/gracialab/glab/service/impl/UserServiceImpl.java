@@ -42,4 +42,9 @@ public class UserServiceImpl extends GenericServiceImpl<User, Long> implements U
         return rol;
         // get(id).setRol_id(rol);
     }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userDaoAPI.findByEmail(email);
+    }
 }

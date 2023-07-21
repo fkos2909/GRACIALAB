@@ -11,7 +11,6 @@ import dev.gracialab.glab.model.User;
 import dev.gracialab.glab.service.api.ReserveServiceAPI;
 import dev.gracialab.glab.service.api.UserServiceAPI;
 
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +25,16 @@ public class ReserveController {
 
     @Autowired
     private UserServiceAPI userServiceAPI;
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/")
+    public String index(Model model) {
+        return "redirect:/rest";
+    }
 
     @RequestMapping("/rest")
     public String indexRest(Model model) {
@@ -53,28 +62,7 @@ public class ReserveController {
         return "innerPage";
     }
 
-    // @RequestMapping("/")
-    // public String index(Model model) {
-    //     model.addAttribute("reserveList", reserveServiceAPI.getAll());    
-    //     return "index";
-    // }
-
-    // @GetMapping("/reserve/{id}/{user_id}")
-    // public String formReserve(@PathVariable("id") Long id, @PathVariable("user_id") Long user_id, Model model) {
-    //     if (id != null && id != 0){
-    //         model.addAttribute("reserve", reserveServiceAPI.get(id));
-    //         if(user_id != 0){
-    //             model.addAttribute("user", userServiceAPI.get(user_id));
-    //         }
-    //     }else{
-    //         model.addAttribute("reserve", new Reserve());
-    //         model.addAttribute("user", new User());
-
-    //     }
-    //     return "saveReserve";
-    // }
-
-    @PostMapping("/saveReserve")
+    @PostMapping("/reserveIndex/saveReserve")
     public String saveReserve(@ModelAttribute("user_id.mail") String mail, Reserve reserve, User user, Model model) {
         List<User> users = userServiceAPI.search(mail);
 
@@ -83,9 +71,7 @@ public class ReserveController {
             return "redirect:/rest/admin";
         }else{
             if(users.isEmpty()){
-                Reserve reserva = reserveServiceAPI.save(reserve);
-                reserva.getUser_id().setRol_id(userServiceAPI.getRol("cliente"));
-                userServiceAPI.save(reserva.getUser_id());
+                reserveServiceAPI.save(reserve);
             }else{
                 Reserve reserva = new Reserve(reserve.getDate(), reserve.getHour(), false, reserve.getReserve_type(), reserve.getNumber_of_people(), reserve.getNote());
                 reserva.setUser_id(userServiceAPI.get(users.get(0).getId()));
@@ -93,8 +79,6 @@ public class ReserveController {
                 
             }
         }
-
-        
 
         return "redirect:/rest";
     }
@@ -105,4 +89,5 @@ public class ReserveController {
         return "redirect:/rest/admin";
     }
     
+
 }

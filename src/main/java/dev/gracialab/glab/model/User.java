@@ -1,15 +1,21 @@
 package dev.gracialab.glab.model;
 
+import java.util.Set;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -29,24 +35,41 @@ public class User {
     private String document;
 
     @Column(unique = true)
-    private String mail;
+    private String email;
+
+    @Column(unique = true)
+    private String username;
 
     @Column
     private String password;
 
     @Column
+    private Boolean enable;
+
+    @Column
     private String phone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="rol_id")
-    private Rol rol_id;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+        joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+    private Set<Rol> roles;
 
-    public Rol getRol_id() {
-        return rol_id;
+    public Boolean getEnable() {
+        return enable;
     }
 
-    public void setRol_id(Rol rol_id) {
-        this.rol_id = rol_id;
+    public void setEnable(Boolean enable) {
+        this.enable = enable;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -90,11 +113,11 @@ public class User {
     }
 
     public String getMail() {
-        return mail;
+        return email;
     }
 
     public void setMail(String mail) {
-        this.mail = mail;
+        this.email = mail;
     }
 
     public String getPassword() {
@@ -111,6 +134,14 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     

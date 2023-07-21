@@ -10,4 +10,6 @@ public interface UserServiceAPI extends GenericServiceAPI<User, Long> {
     
     public List<User> search(String mail);
     public Rol getRol(String name);
+
+    User findUserByEmail(String email);
 }
