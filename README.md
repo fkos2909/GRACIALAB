@@ -10,8 +10,9 @@ Puede confirmar la reserva y editarla desde la tabla. (si la hora da error hay q
 
 Debido a que  no tengo experiencia con las herramientas, tuve que inventarme soluciones a errores que aparecieron, se que algunos son fallos en la logica pero me enfoque en lograr los requerimientos. 
 // Update el 21/07
-El login permite acceso a el home y a la url para realizar una reserva, pero al /admin/ solo permite que ingrese un usuario resgistrado con el rol ADMIN. (Ejemplo de usuario ADMIN para la bd (1,'admin@gmail.com','admin','$10$RznvMN3.x/D3K8jsugpq7.H/vEsnzwGDn2iFsCsDTK48OoKDuDY0y','admin') el usuario y contraseña es admin)
-//
+El login permite acceso a el home y a la url para realizar una reserva, pero al /admin/ solo permite que ingrese un usuario resgistrado con el rol ADMIN. (Ejemplo de usuario ADMIN para la bd (1,'admin@gmail.com','admin','$10$RznvMN3.x/D3K8jsugpq7.H/vEsnzwGDn2iFsCsDTK48OoKDuDY0y','admin') el usuario y contraseña es admin). Cuando realice el login, cambie la relación de User y Rol a un ManyToMany
+
+
 Mi diagrama de base de datos, hace unas horas pense "¿El nombre, apellido y esos datos de Persona no sería otra clase? tipo user_detalles ¿o son parte de la reserva?" pero ya no habia tiempo jajaja.
 
 ![Diagrama en blanco](https://github.com/fkos2909/GRACIALAB/assets/92612247/efb0996b-0fbd-4c9c-9819-7cf6fcbc216f)
